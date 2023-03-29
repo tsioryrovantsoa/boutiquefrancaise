@@ -74,7 +74,7 @@ class AccountController extends AbstractController
     /**
      * @Route("/compte/addresse/add", name="add_account_address")
      */
-    public function createaddress(Request $request): Response
+    public function createaddress(Cart $cart, Request $request): Response
     {
         // dd($this->getUser());
         $address = new Address();
@@ -87,7 +87,12 @@ class AccountController extends AbstractController
             $this->entityManager->persist($address);
             $this->entityManager->flush();
             // dd($address);
-            return $this->redirectToRoute('account_address');
+            if ($cart->get()) {
+                return $this->redirectToRoute('order');
+            } else {
+
+                return $this->redirectToRoute('account_address');
+            }
         }
 
         return $this->render('account/addressform.html.twig', [
