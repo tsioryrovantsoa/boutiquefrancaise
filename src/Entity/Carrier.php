@@ -74,6 +74,6 @@ class Carrier
     }
     public function __toString()
     {
-        return $this->getName() . ' - ' . $this->getDescription() . ' - ' . $this->getPrice() . ' Ar';
+        return $this->getName() . ' - ' . $this->getDescription() . ' - ' . ($this->getPrice() / 100) . ' Ar';
     }
 }

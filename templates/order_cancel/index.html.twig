@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur de paiement
+{% endblock %}
+
+{% block body %}
+
+	<div class="example-wrapper text-center">
+		<h1>Erreur de paiement</h1>
+
+		<p>
+			Bonjour
+			<strong>{{order.user.firstname}}
+				{{order.user.lastname}}</strong>,
+			<br/><br/>
+			Il semblerait que votre commande n:
+			<strong>{{order.reference}}</strong> est echoue,<br/>
+			<hr>
+            Une confirmation de l'erreur de paiement a ete envoyer vers votre email {{ order.user.email }}
+            <hr>
+            <a href="{{ path('order_recap') }}" class="btn btn-primary">Reessayer</a> 
+		</p>
+	</div>
+{% endblock %}
