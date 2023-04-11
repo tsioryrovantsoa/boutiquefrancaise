@@ -24,7 +24,7 @@
 						<div>
 							{{ carrier.name }}<br>
 							{{ carrier.description }}<br>
-							{{ carrier.price|number_format(0,',',' ') }}
+							{{ (carrier.price / 100)|number_format(0,',',' ') }}
 							Ar<br>
 						</div>
 					</div>
