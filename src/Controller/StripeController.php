@@ -26,10 +26,10 @@ class StripeController extends AbstractController
 
         $order = $entityManager->getRepository(Order::class)->findOneByReference($reference);
 
+        // dd($reference);
         if (!$order) {
-            new JsonResponse(['error' => 'order']);
+            $response = new JsonResponse(['error' => 'order']);
         }
-
         foreach ($order->getOrderDetails()->getValues() as $product) {
             $product_object = $entityManager->getRepository(Product::class)->findOneByName($product->getProduct());
             // dd($product);

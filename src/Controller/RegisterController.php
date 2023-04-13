@@ -2,12 +2,14 @@
 
 namespace App\Controller;
 
+use App\Classe\Mail;
 use App\Entity\User;
 use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request as HttpFoundationRequest;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -22,8 +24,9 @@ class RegisterController extends AbstractController
     /**
      * @Route("/inscription", name="app_register")
      */
-    public function index(HttpFoundationRequest $request, UserPasswordEncoderInterface $encoder): Response
+    public function index(MailerInterface $mailer, HttpFoundationRequest $request, UserPasswordEncoderInterface $encoder): Response
     {
+        $notification = null;
         $user = new User();
         $form = $this->createForm(RegisterType::class, $user);
 
@@ -32,20 +35,29 @@ class RegisterController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $user = $form->getData();
 
-            $password = $encoder->encodePassword($user, $user->getPassword());
-            // $doctrine = $this->getDoctrine()->getManager();
-            // $doctrine->persist($user);
-            // $doctrine->flush();
+            $search_email = $this->entityManager->getRepository(User::class)->findOneByEmail($user->getEmail());
 
-            $user->setPassword($password);
+            if (!$search_email) {
+                $password = $encoder->encodePassword($user, $user->getPassword());
 
-            $this->entityManager->persist($user);
-            $this->entityManager->flush();
+                $user->setPassword($password);
+
+                $this->entityManager->persist($user);
+                $this->entityManager->flush();
+
+                $mail = new Mail();
+                $content = "<h1>Bonjour " . $user->getFirstname() . "</h1><br/> Bienvenue parmis nous, Effectuer votre premiere achat !<br/> A Bientot !";
+                $mail->send($user->getEmail(), $user->getFirstname(), 'Bienvenue sur la Boutique Française', $content);
+                $notification = "Votre inscription est fait avec success.";
+            } else {
+                $notification = "E-mail existe deja.";
+            }
         };
 
 
         return $this->render('register/index.html.twig', [
             'form' => $form->createView(),
+            'notification' => $notification
         ]);
     }
 }

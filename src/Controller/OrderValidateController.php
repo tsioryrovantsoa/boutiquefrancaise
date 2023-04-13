@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Classe\Cart;
+use App\Classe\Mail;
 use App\Entity\Order;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -39,6 +40,10 @@ class OrderValidateController extends AbstractController
             $order->setIsPaid(1);
             $this->entityManager->flush();
             // Send Mail
+
+            $mail = new Mail();
+            $content = "<h1>Bonjour " . $order->getUser()->getFirstname() . "</h1><br/> Merci pour votre commande.<br/> A Bientot !";
+            $mail->send($order->getUser()->getEmail(), $order->getUser()->getFirstname(), 'Votre commande ' . $order->getReference() . ' sur La Boutique Francaise est bien validée', $content);
         }
 
 

@@ -6,6 +6,11 @@
 {% block body %}
 	<div class="container">
 		<h1>Inscription</h1>
+		{% if notification %}
+			<div class="alert alert-info">
+				{{ notification }}
+			</div>
+		{% endif %}
         {{ form(form) }}
 	</div>
 {% endblock %}

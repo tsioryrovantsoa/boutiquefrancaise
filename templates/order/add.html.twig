@@ -82,7 +82,7 @@
 		var stripe = Stripe("pk_test_51MsjHVAqxaJiRrJQU6SUNOj1CIErXRdoDFP9GRwYN5ZxvF5OoiXx2b4UzYBo8MTjclEosK1WtJN9ozWSczZcx64J00K6Jcds91");
 var checkoutButton = document.getElementById("checkout-button");
 checkoutButton.addEventListener("click", function () {
-fetch("/commande/create-session/ {{ reference }}", {method: "POST"}).then(function (response) {
+fetch("/commande/create-session/{{ reference }}", {method: "POST"}).then(function (response) {
 return response.json();
 }).then(function (session) {
 if (session.error == 'order') {
