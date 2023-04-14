@@ -33,11 +33,11 @@ class OrderValidateController extends AbstractController
         }
 
         // Modifier status commande
-        if (!$order->isIsPaid()) {
+        if (!$order->getState() == 0) {
             //Vider le panier
             $cart->remove();
 
-            $order->setIsPaid(1);
+            $order->setState(1);
             $this->entityManager->flush();
             // Send Mail
 

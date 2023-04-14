@@ -15,6 +15,8 @@
 					<thead>
 						<tr>
 							<th scope="col">Passe le</th>
+							<th scope="col">Statut</th>
+
 							<th scope="col">Reference</th>
 							<th scope="col">Produit</th>
 							<th scope="col">Total</th>
@@ -25,9 +27,21 @@
 						{% for order in orders %}
 							<tr>
 								<th scope="row">{{ order.createdAt|date('d/m/Y') }}</th>
+								<td>
+									{% if order.state == 1 %}
+										Paiement accepte
+										{% else if order.state == 2 %}
+										Preparation en cours
+										{% else if order.state == 3 %}
+										Livraison en cours
+									{% endif %}
+
+
+								</td>
 								<td>{{ order.reference }}</td>
 								<td>{{ order.orderDetails|length}}</td>
-								<td>{{((order.carrierPrice + order.getTotal())/100)|number_format(0,' ',' ')}} Ariary</td>
+								<td>{{((order.carrierPrice + order.getTotal())/100)|number_format(0,' ',' ')}}
+									Ariary</td>
 								<td>
 									<a class="btn btn-primary" href="{{ path('account_order_show', {'reference' : order.reference}) }}">Voir ma commande</a>
 								</td>

@@ -13,6 +13,16 @@
 		{{ order.createdAt|date('d/m/Y') }}<br/>
 		Reference :
 		{{ order.reference }}<br/>
+		Status :
+		<strong>
+			{% if order.state == 1 %}
+				Paiement accepte
+			{% else if order.state == 2 %}
+				Preparation en cours
+			{% else if order.state == 3 %}
+				Livraison en cours
+			{% endif %}
+		</strong><br/>
 		Transporteur choisi :
 		{{ order.carrierName }}<br/>
 		<hr>
@@ -42,13 +52,17 @@
 		<div class="text-right">
 			<strong>Sous-total :
 			</strong>
-			{{((order.getTotal()/100)|number_format(0,' ',' '))}} Ariary<br/>
+			{{((order.getTotal()/100)|number_format(0,' ',' '))}}
+			Ariary<br/>
 			<strong>Livraison :
 			</strong>
 			{{(order.carrierprice)|number_format(0,' ',' ') }}
 			Ariary<br/>
 			<strong>Total :
-			</strong> {{((order.carrierPrice + (order.getTotal()/100)))|number_format(0,' ',' ')}} Ariary <br/>
+			</strong>
+			{{((order.carrierPrice + (order.getTotal()/100)))|number_format(0,' ',' ')}}
+			Ariary
+			<br/>
 		</div>
 	</div>
 {% endblock %}
