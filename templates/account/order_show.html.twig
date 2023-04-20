@@ -17,9 +17,9 @@
 		<strong>
 			{% if order.state == 1 %}
 				Paiement accepte
-			{% else if order.state == 2 %}
+			{% elseif order.state == 2 %}
 				Preparation en cours
-			{% else if order.state == 3 %}
+			{% elseif order.state == 3 %}
 				Livraison en cours
 			{% endif %}
 		</strong><br/>
