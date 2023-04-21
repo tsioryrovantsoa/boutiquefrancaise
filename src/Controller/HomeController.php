@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Classe\Mail;
+use App\Entity\Header;
 use App\Entity\Product;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,9 +25,10 @@ class HomeController extends AbstractController
     public function index(): Response
     {
         $product = $this->entityManager->getRepository(Product::class)->findByIsBest(1);
-        // dd($product);
+        $headers = $this->entityManager->getRepository(Header::class)->findAll();
         return $this->render('home/index.html.twig', [
             'products' => $product,
+            'headers' => $headers
         ]);
     }
 }
