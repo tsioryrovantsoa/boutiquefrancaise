@@ -1,12 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mon Compte{% endblock %}
+{% block title %}Mon Compte
+{% endblock %}
 
 {% block body %}
 
-<div class="container pt-5">
-    <h1>Mon compte</h1>
+	<div class="container pt-5">
+		<h1>Mon compte</h1>
 
-    Bienvenue {{ app.user.firstname }}
-</div>
+		Bienvenue
+		{{ app.user.firstname }}
+		<br/>
+
+		{% if is_granted('ROLE_ADMIN') %}
+			<a href="/admin">Administrateur</a>
+		{% endif %}
+	</div>
 {% endblock %}
