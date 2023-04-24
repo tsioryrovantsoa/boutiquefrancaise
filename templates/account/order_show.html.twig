@@ -56,11 +56,11 @@
 			Ariary<br/>
 			<strong>Livraison :
 			</strong>
-			{{(order.carrierprice)|number_format(0,' ',' ') }}
+			{{(order.carrierprice/100)|number_format(0,' ',' ') }}
 			Ariary<br/>
 			<strong>Total :
 			</strong>
-			{{((order.carrierPrice + (order.getTotal()/100)))|number_format(0,' ',' ')}}
+			{{(((order.carrierPrice/100) + (order.getTotal()/100)))|number_format(0,' ',' ')}}
 			Ariary
 			<br/>
 		</div>

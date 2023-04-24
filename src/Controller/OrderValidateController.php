@@ -33,7 +33,7 @@ class OrderValidateController extends AbstractController
         }
 
         // Modifier status commande
-        if (!$order->getState() == 0) {
+        if ($order->getState() == 0) {
             //Vider le panier
             $cart->remove();
 

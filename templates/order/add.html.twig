@@ -18,10 +18,13 @@
 					</h5>
 					<div class="bg-light p-30 mb-5">
 						<div class="border-bottom">
-							Mon addresse de livraison<br>
-							{{ delivery|raw }}
-						</div>
+							<strong>Mon addresse de livraison :
+							</strong><br>
+							{{ delivery|raw }}<br>
+						</div><br>
 						<div>
+							<strong>Mon transporteur :
+							</strong><br>
 							{{ carrier.name }}<br>
 							{{ carrier.description }}<br>
 							{{ (carrier.price / 100)|number_format(0,',',' ') }}
@@ -62,7 +65,7 @@
 							<div class="d-flex justify-content-between mt-2">
 								<h5>TOTAL
 								</h5>
-								<h6>{{ ((total / 100)+ (carrier.price / 100))|number_format(0,',',' ')}}
+								<h6>{{ (((total / 100)+ (carrier.price / 100)))|number_format(0,',',' ')}}
 									Ar</h6>
 							</div>
 
@@ -78,10 +81,18 @@
 	</div>
 {% endblock %}
 {% block javascripts %}
+<style>
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+</style>
 	<script type="text/javascript">
 		var stripe = Stripe("pk_test_51MsjHVAqxaJiRrJQU6SUNOj1CIErXRdoDFP9GRwYN5ZxvF5OoiXx2b4UzYBo8MTjclEosK1WtJN9ozWSczZcx64J00K6Jcds91");
 var checkoutButton = document.getElementById("checkout-button");
 checkoutButton.addEventListener("click", function () {
+ $('a').addClass("disabled");
 fetch("/commande/create-session/{{ reference }}", {method: "POST"}).then(function (response) {
 return response.json();
 }).then(function (session) {

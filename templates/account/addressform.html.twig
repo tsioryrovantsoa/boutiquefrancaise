@@ -7,7 +7,7 @@
 
 	<div class="container pt-5">
 		<h1>Ajouter une addresse</h1>
-		<a class="btn btn-info" href="{{ path('account_address') }}">Retour</a>
+		
 		{{ form_start(form) }}
 		<div class="row">
 			<div class="col-md-12">
@@ -38,6 +38,6 @@
 				{{ form_row(form.phone) }}
 			</div>
 		</div>
-		{{ form_end(form) }}
+		{{ form_end(form) }}<a class="btn btn-info" href="{{ path('account_address') }}">Retour</a>
 	</div>
 {% endblock %}
