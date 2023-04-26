@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Classe\Mail;
 use App\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,9 +20,16 @@ class ContactController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->addFlash('notice', 'Merci de nous avoir contacter');
+            $mail = new Mail();
+            // $form->get('new_password')->getData();
+            // dd($form->getData());
 
-            // 
+            $content = "<h4>Bonjour Tsiory, </h4><br/> Message du Boutique Française <br/> Nom : " . $form->get('nom')->getData() . " <br/> E-mail : " . $form->get('email')->getData() . " <br/> Message : " . $form->get('content')->getData() . "<br/> A Bientot !";
+            $mail->send('tsioryrovantsoa@gmail.com', 'Tsiory Rovantsoa', 'Message venant de La Boutique Francaise', $content);
+
+            $this->addFlash('notice', 'Merci de nous avoir contacter');
+            unset($form);
+            $form = $this->createForm(ContactType::class);
         }
 
         return $this->render('contact/index.html.twig', [

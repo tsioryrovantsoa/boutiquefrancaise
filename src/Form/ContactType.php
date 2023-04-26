@@ -21,12 +21,6 @@ class ContactType extends AbstractType
                     'placeholder' => 'Merci de saisir votre nom'
                 ]
             ])
-            ->add('prenom', TextType::class, [
-                'label' => 'Votre prenom',
-                'attr' => [
-                    'placeholder' => 'Merci de saisir votre prenom'
-                ]
-            ])
             ->add('email', EmailType::class, [
                 'label' => 'Votre email',
                 'attr' => [
@@ -42,7 +36,7 @@ class ContactType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => 'Envoyer',
                 'attr' => [
-                    'class' => 'btn btn-success'
+                    'class' => 'btn btn-primary'
                 ]
             ]);
     }

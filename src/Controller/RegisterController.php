@@ -49,6 +49,10 @@ class RegisterController extends AbstractController
                 $content = "<h1>Bonjour " . $user->getFirstname() . "</h1><br/> Bienvenue parmis nous, Effectuer votre premiere achat !<br/> A Bientot !";
                 $mail->send($user->getEmail(), $user->getFirstname(), 'Bienvenue sur la Boutique Française', $content);
                 $notification = "Votre inscription est fait avec success.";
+
+                $this->addFlash('notice', 'Veuillez-vous connecter !');
+
+                return $this->redirectToRoute('app_login');
             } else {
                 $notification = "E-mail existe deja.";
             }
