@@ -49,7 +49,7 @@ class StripeController extends AbstractController
         $products_for_stripe[] = [
             'price_data' => [
                 'currency' => 'mga',
-                'unit_amount' => ($order->getCarrierPrice()),
+                'unit_amount' => ($order->getCarrierPrice() / 100),
                 'product_data' => [
                     'name' => $order->getCarrierName(),
                     'images' => [$YOUR_DOMAIN],
