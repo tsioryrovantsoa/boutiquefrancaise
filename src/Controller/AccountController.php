@@ -29,6 +29,7 @@ class AccountController extends AbstractController
         return $this->render('account/index.html.twig',);
     }
 
+
     /**
      * @Route("/compte/motdepasse", name="app_account_password")
      */
