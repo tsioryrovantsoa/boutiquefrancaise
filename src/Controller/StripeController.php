@@ -20,7 +20,7 @@ class StripeController extends AbstractController
      */
     public function index(EntityManagerInterface $entityManager, Cart $cart, $reference): Response
     {
-        $YOUR_DOMAIN = 'http://127.0.0.1:8000';
+        $YOUR_DOMAIN = 'https://boutiquefr.herokuapp.com';
 
         $products_for_stripe = [];
 
