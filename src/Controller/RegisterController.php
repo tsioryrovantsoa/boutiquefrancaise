@@ -24,7 +24,7 @@ class RegisterController extends AbstractController
     /**
      * @Route("/inscription", name="app_register")
      */
-    public function index(MailerInterface $mailer, HttpFoundationRequest $request, UserPasswordEncoderInterface $encoder): Response
+    public function index(HttpFoundationRequest $request, UserPasswordEncoderInterface $encoder): Response
     {
         $notification = null;
         $user = new User();

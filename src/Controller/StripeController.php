@@ -20,7 +20,7 @@ class StripeController extends AbstractController
      */
     public function index(EntityManagerInterface $entityManager, Cart $cart, $reference): Response
     {
-        $YOUR_DOMAIN = 'https://boutiquefr.tsioryrakotoarimalala.com';
+        $YOUR_DOMAIN = 'https://www.boutiquefr.tsioryrakotoarimalala.com';
 
         $products_for_stripe = [];
 
